@@ -3,8 +3,6 @@
 #include "Explosion.cpp"
 #include "ExplosionFactory.cpp"
 #include "ExplosionCacheProxy.cpp"
-#include "FlyweightFactory.cpp"
-#include "ParticlePrototype.cpp"
 
 using namespace std;
 
