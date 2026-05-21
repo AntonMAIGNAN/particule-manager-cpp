@@ -20,17 +20,33 @@ public:
     {
         particles.push_back(particle);  
     }
+
+    void render() 
+    {
+        cout << "[explosion] Rendering explosion with " << particles.size() << " particles." << endl;
+        //TODO - loop for ONELINE per particle: render particle.
+    }
 };
+
+// =================================================================================
+// IExplosionFactory
+// Interface pour la factory d'explosion
+// =================================================================================
+class IExplosionFactory
+{
+public:
+    virtual Explosion create(ExplosionConfig &config) = 0;
+    virtual ~IExplosionFactory() {}
+};
+
 
 // =================================================================================
 // ExplosionFactory
 // Factory pour créer des explosions à partir d'une configuration d'explosion
 // =================================================================================
-class ExplosionFactory
+class ExplosionFactory: public IExplosionFactory
 {
 private:
-    ExplosionFactory() {}
-
     float randomSpeedFromSpread(float spread) const
     {
         return ((float)rand() / (float)RAND_MAX) * spread - (spread / 2);
@@ -42,6 +58,8 @@ private:
     }
 
 public:
+    ExplosionFactory() {}
+
     Explosion create(ExplosionConfig &config) 
     {
         FlyweightFactory *flyweightFactory = FlyweightFactory::getInstance();
