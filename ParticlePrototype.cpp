@@ -1,6 +1,8 @@
 #pragma once
 #include <iostream>
 
+#include "ParticuleDecorator.cpp"
+
 using namespace std;
 
 // =================================================================================
@@ -19,7 +21,7 @@ public:
 // ParticlePrototype
 // Particule concrète représentant une particule
 // =================================================================================
-class ParticlePrototype : public IParticlePrototype
+class ParticlePrototype : public IParticlePrototype, public IParticle
 {
 private:
     float size;
@@ -46,5 +48,11 @@ public:
     IParticlePrototype* clone() const override
     {
         return new ParticlePrototype(*this);
+    }
+
+    void render() override
+    {
+        cout << "Rendering particle at (" << x << ", " << y << ") with size " << size << ", color " << color << ", speed " << speed 
+             << ", texture " << texture << ", shader " << shader << ", physics " << physics << "." << endl;
     }
 };
